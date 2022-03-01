@@ -17,7 +17,7 @@ function f1() {
   'use strict';
   return this;
 }
-console.log(f1() === window); // false
+console.log(f1() === window); // false (because 'use strict' does not allow default binding to happen)
 
 // ------------
 
@@ -44,7 +44,7 @@ var myObject = {};
 myObject.someMethod = function () {
   console.log(this);
 };
-myObject.someMethod(); // ?
+myObject.someMethod(); // myObject
 
 // ------------
 
@@ -82,7 +82,7 @@ user.foo(); // Simple function call
 // false
 let fun1 = user.foo1;
 fun1(); // true
-user.foo1(); // true (answer is false, but why?)
+user.foo1(); // false (because this point to the user object and not the window)
 
 // ------------
 
@@ -97,7 +97,7 @@ var obj = {
 obj.getX(); // 81
 
 var retrieveX = obj.getX;
-retrieveX(); // 9 (but how and why?)
+retrieveX(); // 9 (when removed from the context of the function, no rule applies, hence 9)
 
 var boundGetX = retrieveX.bind(obj);
 boundGetX(); // 81
@@ -135,10 +135,10 @@ obj.getThis3 = obj.getThis.bind(obj);
 obj.getThis4 = obj.getThis2.bind(obj);
 
 // Output
-obj.getThis(); //Window (why?)
+obj.getThis(); //Window (this, when alone will always point to window)
 
 // Output
-obj.getThis.call(a); // Window (why?)
+obj.getThis.call(a); // Window (arrow function has no concept of this and behaves much in the same way that it did above)
 
 // Output
 obj.getThis2(); // obj (✅)
@@ -147,11 +147,10 @@ obj.getThis2(); // obj (✅)
 obj.getThis2.call(a); // a (✅)
 
 // Output
-obj.getThis3(); // Window (no clue why)
+obj.getThis3(); // window (arrow function, so it's always the window)
 
 // Output
-obj.getThis4(); //  obj (really confused)
-
+obj.getThis4(); //  obj (reference itself)
 // -------------
 
 let person = {
@@ -262,7 +261,7 @@ let obj2 = {
 };
 
 let getSecondData = obj2.printSecondData.bind(obj1);
-console.log(getSecondData()); // Output and why ???
+console.log(getSecondData()); // ❌
 
 // --------------
 
@@ -273,7 +272,7 @@ const call = {
   },
 };
 
-call.says(); // output ???
+call.says(); // Hey, mom just called.
 
 // -----------------
 
@@ -286,7 +285,7 @@ const call = {
 
 let newCall = call.says;
 
-newCall(); // output ???
+newCall(); // ❌
 
 //  -----------------
 
@@ -304,4 +303,4 @@ const call = {
 
 let newCall = call.anotherCaller;
 
-newCall(); // output ??
+newCall(); // ❌
