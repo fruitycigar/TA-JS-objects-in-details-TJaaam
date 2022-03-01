@@ -61,6 +61,7 @@ let catMethods = {
 
 Object.setPrototypeOf(catMethods, animalMethods);
 
+
 function createCat(location, numberOfLegs = 4, name, colorOfeyes) {
     let animal = Object.create(animalMethods); //(update to animalMethods)
     animal.location = location;
