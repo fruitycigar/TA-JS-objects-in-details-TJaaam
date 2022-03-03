@@ -66,6 +66,9 @@ function PersonConstructor() {
   this.greet = function() {
     console.log(`Hello.`);
   } 
+  this.introduce = function() {
+    console.log(`Hello, my name is ${this.name}.`);
+  }
 }
 
 // /********* Uncomment this line to test your work! *********/
@@ -116,20 +119,20 @@ george.greet(); // -> Logs 'hello'
 
 /*** CHALLENGE 2 of 3 ***/
 
-// class DeveloperClass extends PersonClass {
-//   constructor(name) {
-//     super();
-//   }
+class DeveloperClass extends PersonClass {
+  constructor(name) {
+    super(name);
+  }
 
-//   introduce() {
-//     console.log(`Hello World, my name is ${this.name}.`);
-//   }
-// }
+  introduce() {
+    console.log(`Hello World, my name is ${this.name}.`);
+  }
+}
 
 // /********* Uncomment these lines to test your work! *********/
-// var thai = new DeveloperClass('Thai', 32);
-// console.log(thai.name); // -> Logs 'Thai'
-// thai.introduce(); //-> Logs 'Hello World, my name is Thai'
+var thai = new DeveloperClass('Thai', 32);
+console.log(thai.name); // -> Logs 'Thai'
+thai.introduce(); //-> Logs 'Hello World, my name is Thai'
 
 /****************************************************************
                       EXTENSION: SUBCLASSING
@@ -149,16 +152,21 @@ function userFactory(name, score) {
   return user;
 }
 
-var adminFunctionStore /* Put code here */;
+var adminFunctionStore = Object.create(userFunctionStore);
 
 function adminFactory(name, score) {
-  // Put code here
+  let obj = userFactory(name, score);
+  Object.setPrototypeOf(obj, adminFunctionStore);
+  obj.type = `Admin`;
+  return obj;
 }
 
-/* Put code here for a method called sharePublicMessage*/
+adminFunctionStore.sharePublicMessage =  function() {
+  console.log(`Welcome users!`);
+}
 
 var adminFromFactory = adminFactory('Eva', 5);
 
 // /********* Uncomment these lines to test your work! *********/
-// adminFromFactory.sayType() // -> Logs "I am a Admin"
-// adminFromFactory.sharePublicMessage() // -> Logs "Welcome users!"
+adminFromFactory.sayType() // -> Logs "I am a Admin"
+adminFromFactory.sharePublicMessage() // -> Logs "Welcome users!"
