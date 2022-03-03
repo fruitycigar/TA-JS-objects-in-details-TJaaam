@@ -3,7 +3,13 @@
 `myMap` will behave similar to how the `Array.map` works. To test the implementation use the code below.
 */
 
-// myMap function goes here
+function myMap(cb) {
+  for(let elm of arr) {
+    return cb(elm);
+  }
+}
+
+Array.prototype = myMap();
 
 // Test the myMap function you created above
 
