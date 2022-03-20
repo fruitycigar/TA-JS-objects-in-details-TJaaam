@@ -1,99 +1,69 @@
-// ### For single question we need the following data and methods:
+// Without object
 
-// - Data:
-//   - `title` (title of the question)
-//   - `options` (array of options)
-//   - `correctAnswerIndex` (index of the correct option)
-// - Methods:
-//   - `isAnswerCorrect` (will accept the index and returns `true` or `false` based on the answer is correct or not)
-//   - `getCorrectAnswer` (will return the correct answer of the quiz when the function is called)
+// Data 1
 
-// ### Create the object using the following ways
+// let question1 = `What is the most profitable company in India?`
 
-// For each different ways of creating object write different solutions.
+// let options = [`RIL`, `Tata Sons`, `Haldiram's`, `Infosys`];
 
-// - Without Object
-// - Organize using object
-// - Use a function to create object
-// - Convert the function to use `this` keyword
-// - Write test by creating two objects also test both methods.
-
-// Without Object
-
-// let question1 = `What is Ankit's favorite TV show?`;
-// let options1 = [`Game of Thrones`, `The X-Files`, `Breaking Bad`, `House M.D`];
 // let correctAnswerIndex = 0;
 
+// Methods 1
+
 // function isAnswerCorrect(index) {
-//     if(index === 0) {
-//         return true;
-//     } else {
-//         return false;
-//     }
+//     return index === correctAnswerIndex;
 // }
 
 // function getCorrectAnswer() {
-//     return `The correct answer is ${options1[0]}.`;
+//     return options[correctAnswerIndex];
 // }
 
-// Organize using object
+// Organizing using an object
 
 // let question = {
-//     title: `What is Ankit's favorite TV show?`,
-//     options: [`Game of Thrones`, `The X-Files`, `Breaking Bad`, `House M.D`],
+//     title: `What is the most profitable company in India?`,
+//     options: [`RIL`, `Tata Sons`, `Haldiram's`, `Infosys`],
+//     correctAnswerIndex: 0,
 //     isAnswerCorrect: function(index) {
-//         if(index === 0) {
-//             return true;
-//         } else {
-//             return false;
-//         }
+//         return index === question.correctAnswerIndex;
 //     },
 //     getCorrectAnswer: function() {
-//         return `The correct answer is ${question.options[0]}.`;
+//         return question.options[question.correctAnswerIndex];
 //     }
-// };
-
-// - Use a function to create object
-
-// function createQuestion(title, options, correctIndex) {
-//     let question = {};
-//     question.title = title;
-//     question.options = options;
-//     question.isAnswerCorrect = function(index) {
-//         if (index === correctIndex) {
-//             return true;
-//         } else {
-//             return false;
-//         }
-//     };
-//     question.getCorrectAnswer = function() {
-//         return `The correct answer is ${options[correctIndex]}.`;
-//     }
-//     return question;
 // }
 
-// let question1 = createQuestion(`What is Ankit's favorite show?`, [`Game of Thrones`, `The X-Files`, `Breaking Bad`, `House M.D`], 0);
+// Object creation using a function
 
+// function createQuestion(title, optionsArr, correctAnsIndex) {
+//     let obj = {};
+//     obj.title = title;
+//     obj.options = optionsArr;
+//     obj.correctAnswerIndex = correctAnsIndex;
+//     obj.isAnswerCorrect = function(index) {
+//         return index === correctAnsIndex;
+//     };
+//     obj.getCorrectAnswer = function() {
+//         return optionsArr[correctAnsIndex];
+//     }
+//     return obj;
+// }
 
-// - Convert the function to use `this` keyword (Have a problem here)
+// let question = createQuestion(`What is the most profitable company in India?`, [`RIL`, `Tata Sons`, `Haldiram's`, `Infosys`], 0);
 
-function createQuestion(title, options, correctIndex) {
-    let question = {};
-    question.title = title;
-    question.options = options;
-    question.isAnswerCorrect = function(index) {
-        if (index === correctIndex) {
-            return true;
-        } else {
-            return false;
-        }
+// Using `this`
+
+function createQuestion(title, optionsArr, correctAnsIndex) {
+    let obj = {};
+    obj.title = title;
+    obj.options = optionsArr;
+    obj.correctAnswerIndex = correctAnsIndex;
+    obj.isAnswerCorrect = function(index) {
+        return index === this.correctAnswerIndex;
     };
-    question.getCorrectAnswer = function() {
-        return `The correct answer is ${options[correctIndex]}.`;
+    obj.getCorrectAnswer = function() {
+        return this.options[this.correctAnswerIndex];
     }
-    return question;
+    return obj;
 }
 
-let question1 = createQuestion(`What is Ankit's favorite show?`, [`Game of Thrones`, `The X-Files`, `Breaking Bad`, `House M.D`], 0);
-
-// - Write test by creating two objects also test both methods. (Need help here as well.)
+let question = createQuestion('Where is the capital of Jordan', ['Tashkent', 'Amaan', 'Kuwait City', 'Nairobi'], 1);
