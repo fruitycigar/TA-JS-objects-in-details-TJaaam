@@ -1,152 +1,127 @@
-// # 🎖 Object Creation Patterns
-
-// Create a object using the following patterns given below.
-
-// ## Create in all 4 formats
-
-// - [ ] Using function to create object
-// - [ ] Using Object.create (prototypal pattern)
-// - [ ] Using Pseudoclassical Way
-// - [ ] Using Class
-
-// ## Requirements
-
-// Create User (class/function) with the following properties.
-
-// - [ ] properties (data):
-//   - [ ] name
-//   - [ ] id
-//   - [ ] noOfProjects
-// - [ ] methods:
-//   - [ ] getProjects -> return number of project
-//   - [ ] changeName -> accepts one parameter (newName)returns old user name
-//   - [ ] incrementProject -> returns updated number of projects
-//   - [ ] decrementProject -> returns updated number of projects
-
-// Write 2 tests for all the different ways of creating object. Test all the methods on these objects.
-
-// Factory pattern
+// Using function to create object
 
 // function createUser(name, id, noOfProjects) {
 //     let user = {};
-//     user.username = name;
-//     user.userID = id;
-//     user.projects = noOfProjects;
+//     user.name = name;
+//     user.id = id;
+//     user.noOfProjects = noOfProjects;
 
-//     user.getProjects = function() {
-//         return user.projects;
-//     }
-//     user.changeName = function(newName) {
-//         return user.username;
-//     }
-//     user.incrementProject = function(value = 1) {
-//         user.projects = user.projects + value;
-//         return user.projects;
-//     }
-//     user.derementProject = function(value = 1) {
-//         user.projects = user.projects - value;
-//         return user.projects;
-//     }
+    // user.getProjects = function() {
+    //     return user.noOfProjects;
+    // }
+    // user.changeName = function(newName) {
+    //     user.name = newName;
+    //     return user.name;
+    // }
+    // user.incrementProject = function(value = 1) {
+    //     user.noOfProjects = user.noOfProjects + value;
+    //     return user.noOfProjects;
+    // }
+    // user.decrementProject = function(value = 1) {
+    //     user.noOfProjects = user.noOfProjects - value;
+    //     return user.noOfProjects;
+    // }
 
 //     return user;
 // }
 
 // Prototypal pattern
 
-// let userMethods = {
-//     getProjects: function() {
-//         return this.projects;
-//     },
-//     changeName: function(newName) {
-//         return this.username;
-//     },
-//     incrementProject: function(value = 1) {
-//         this.projects = this.projects + value;
-//         return this.projects;
-//     },
-//     derementProject: function(value = 1) {
-//         this.projects = this.projects - value;
-//         return this.projects;
-//     }
-
-// }
-
 // function createUser(name, id, noOfProjects) {
-//     let user = Object.create(userMethods);
-//     user.username = name;
-//     user.userID = id;
-//     user.projects = noOfProjects;
+//     let user = Object.create(userMethods); // to be replaced later with userMethods
+//     user.name = name;
+//     user.id = id;
+//     user.noOfProjects = noOfProjects;
 
 //     return user;
 // }
 
-
-// Pseudoclassical pattern 
-
-// function CreateUser(name, id, noOfProjects) {
-//     this.username = name;
-//     this.userID = id;
-//     this.projects = noOfProjects;
-// }
-
-// CreateUser.prototype = {
-//     getProjects() {
-//         return this.projects;
+// let userMethods = {
+//     getProjects: function() {
+//         return this.noOfProjects;
 //     },
-//     changeName(newName) {
-//         return this.username;
+//     changeName: function(newName) {
+//         this.name = newName;
+//         return this.name;
 //     },
-//     incrementProject(value = 1) {
-//         this.projects = this.projects + value;
-//         return this.projects;
+//     incrementProject: function(value = 1) {
+//         this.noOfProjects = this.noOfProjects + value;
+//         return this.noOfProjects;
 //     },
-//     derementProject(value = 1) {
-//         this.projects = this.projects - value;
-//         return this.projects;
+//     decrementProject: function(value = 1) {
+//         this.noOfProjects = this.noOfProjects - value;
+//         return this.noOfProjects;
 //     }
 // }
 
+// Pseudoclassical Pattern
 
-// Classical pattern
+// function CreateUser(name, id, noOfProjects) {
+//     this.name = name;
+//     this.id = id;
+//     this.noOfProjects = noOfProjects;
+// }
+
+// CreateUser.prototype = {
+//     getProjects: function() {
+//         return this.noOfProjects;
+//     },
+//     changeName: function(newName) {
+//         this.name = newName;
+//         return this.name;
+//     },
+//     incrementProject: function(value = 1) {
+//         this.noOfProjects = this.noOfProjects + value;
+//         return this.noOfProjects;
+//     },
+//     decrementProject: function(value = 1) {
+//         this.noOfProjects = this.noOfProjects - value;
+//         return this.noOfProjects;
+//     }
+// }
+
+// Using Class
 
 class User {
+
     constructor(name, id, noOfProjects) {
-        this.username = name;
-        this.userID = id;
-        this.projects = noOfProjects;
+        this.name = name;
+        this.id = id;
+        this.noOfProjects = noOfProjects;
     }
     getProjects() {
-        return this.projects;
+        return this.noOfProjects;
     }
     changeName(newName) {
-        return this.username;
+        this.name = newName;
+        return this.name;
     }
     incrementProject(value = 1) {
-        this.projects = this.projects + value;
-        return this.projects;
+        this.noOfProjects = this.noOfProjects + value;
+        return this.noOfProjects;
     }
-    derementProject(value = 1) {
-        this.projects = this.projects - value;
-        return this.projects;
+    decrementProject(value = 1) {
+        this.noOfProjects = this.noOfProjects - value;
+        return this.noOfProjects;
     }
+
 }
 
 const user1 = new User(`Mridul`, `bukraatboy69`, 467);
 const user2 = new User(`Karaleigh`, `parkgirl33`, 7);
 
-
-console.group(user1.username);
-console.log(user1.userID);
-console.log(user1.projects);
+console.group(user1.name);
+console.log(user1.id);
+console.log(user1.noOfProjects);
 console.log(user1.changeName(`Singhai`));
 console.log(user1.incrementProject(23));
-console.log(user1.derementProject(55));
+console.log(user1.decrementProject(55));
 console.groupEnd();
 
-console.group(user2.username);
-console.log(user2.userID);
-console.log(user2.projects);
+console.group(user2.name);
+console.log(user2.id);
+console.log(user2.noOfProjects);
 console.log(user2.changeName(`Singhai`));
 console.log(user2.incrementProject(7));
-console.log(user2.derementProject(4));
+console.log(user2.decrementProject(4));
 console.groupEnd();
