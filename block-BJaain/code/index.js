@@ -1,15 +1,15 @@
-console.log(this.document === document); // true
+console.log(this.document === document); // 
 
 // ------------
 
-console.log(this === window); //true
+console.log(this === window); //
 
 // ------------
 
 var myFunction = function () {
   console.log(this);
 };
-myFunction(); // Window
+myFunction(); // 
 
 // ------------
 
@@ -17,7 +17,7 @@ function f1() {
   'use strict';
   return this;
 }
-console.log(f1() === window); // false (because 'use strict' does not allow default binding to happen)
+console.log(f1() === window); // 
 
 // ------------
 
@@ -26,8 +26,8 @@ function foo() {
   console.log(this === window);
 }
 
-foo(); // Simple function call
-          // true
+foo(); // 
+          // 
 
 // ------------
 
